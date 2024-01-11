@@ -1,7 +1,9 @@
-import { View, Image, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
-import Input from '../shared/Input'
-import Button from '../shared/Button'
+import { View, Image, Text, TouchableOpacity, FlatList } from 'react-native';
+import React from 'react';
+import Input from '../shared/Input';
+import Button from '../shared/Button';
+import { loginForm } from '../../utils/const/authForm';
+
 
 export default function Login({ navigation }) {
     return (
@@ -11,12 +13,17 @@ export default function Login({ navigation }) {
                     source={require('../../../assets/images/auth-logo.png')}
                 />
             </View>
-            <View className='mt-5 w-full'>
-                <Input title={'E-mail Adresi'} />
-            </View>
 
-            <View className='mt-5 w-full'>
-                <Input title={'Şifre'} />
+            <View className='w-full'>
+                <FlatList
+                    data={loginForm}
+                    renderItem={({ item }) => (
+                        <View className='mt-5 w-full'>
+                            <Input title={item.title} icon={item.icon} isSecure={item.isSecure} secureIcon={item.secureIcon} />
+                        </View>
+                    )}
+                    keyExtractor={item => item.id}
+                />
             </View>
 
             <View className='w-full mt-5'>
