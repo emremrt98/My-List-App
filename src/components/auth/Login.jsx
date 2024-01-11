@@ -19,7 +19,7 @@ export default function Login({ navigation }) {
                     data={loginForm}
                     renderItem={({ item }) => (
                         <View className='mt-5 w-full'>
-                            <Input title={item.title} icon={item.icon} isSecure={item.isSecure} secureIcon={item.secureIcon} />
+                            <Input item={item} />
                         </View>
                     )}
                     keyExtractor={item => item.id}
