@@ -1,10 +1,21 @@
 import { Text, View, TouchableOpacity, FlatList, Image } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '../shared/Input';
 import Button from '../shared/Button';
 import { registerForm } from '../../utils/const/authForm';
 
 export default function Register({ navigation }) {
+    const [formInfo, setFormInfo] = useState({
+        name: '',
+        surname: '',
+        email: '',
+        password: '',
+        rpassword: ''
+    })
+
+    useEffect(() => console.log(formInfo), [formInfo])
+
+
     return (
         <View className='bg-white flex-1 items-center justify-center px-5'>
             <View>
@@ -18,7 +29,7 @@ export default function Register({ navigation }) {
                     data={registerForm}
                     renderItem={({ item }) => (
                         <View className='mt-5 w-full'>
-                            <Input item={item} />
+                            <Input item={item} setFormInfo={setFormInfo} formInfo={formInfo} />
                         </View>
                     )}
 

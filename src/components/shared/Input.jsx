@@ -1,12 +1,16 @@
 import { Text, View, TextInput, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-export default function Input({ item: { title, icon, isSecure = false, secureIcon } }) {
+export default function Input({ item: { title, icon, isSecure = false, secureIcon, type }, setFormInfo, formInfo }) {
+
     const [isVisible, setIsVisible] = useState(true);
 
     const handleChangeVisible = () => {
         setIsVisible(!isVisible);
     }
-    console.log(title, icon, isSecure, secureIcon)
+
+    const changeFormInfo = (name, value) => {
+        setFormInfo((prevList) => ({ ...prevList, [name]: value }))
+    }
 
     return (
 
@@ -18,6 +22,8 @@ export default function Input({ item: { title, icon, isSecure = false, secureIco
                         <TextInput className='h-full px-[37px] text-[13px]'
                             secureTextEntry={isVisible}
                             placeholder={title}
+                            onChangeText={(value) => { changeFormInfo(type, value) }}
+                            value={formInfo.type}
                         />
                         <Text className='text-[11px] text-primary absolute -top-[8px] left-[10px] bg-white 
                 px-[10px] border-l-[1px] border-r-[1px] border-border'>{title}</Text>
@@ -36,6 +42,8 @@ export default function Input({ item: { title, icon, isSecure = false, secureIco
                         <View className='absolute left-[10px] top-[12px]'>{icon}</View>
                         <TextInput className='h-full px-[37px] text-[13px]'
                             placeholder={title}
+                            onChangeText={(value) => { changeFormInfo(type, value) }}
+                            value={formInfo.type}
                         />
                         <Text className='text-[11px] text-primary absolute -top-[8px] left-[10px] bg-white 
                 px-[10px] border-l-[1px] border-r-[1px] border-border'>{title}</Text>
