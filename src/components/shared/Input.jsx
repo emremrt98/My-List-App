@@ -1,17 +1,30 @@
 import { Text, View, TextInput, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
-export default function Input({ item: { title, icon, isSecure = false, secureIcon, type }, setFormInfo, formInfo }) {
+import { useSelector, useDispatch } from 'react-redux'
+import { setUserValidationInput } from '../../redux/userSlice';
 
+
+
+export default function Input({ item: { title, icon, isSecure = false, secureIcon, type } }) {
+
+    const user = useSelector((state) => state.user);
     const [isVisible, setIsVisible] = useState(true);
+    const dispatch = useDispatch();
 
     const handleChangeVisible = () => {
         setIsVisible(!isVisible);
     }
 
-    const changeFormInfo = (name, value) => {
-        setFormInfo((prevList) => ({ ...prevList, [name]: value }))
-    }
+    const changeFormInfo = (type, value) => {
+        // setFormInfo((prevList) => ({ ...prevList, [name]: value }))
+        dispatch(setUserValidationInput(
+            {
+                type,
+                value,
+            }
+        ));
 
+    }
     return (
 
         <>
@@ -23,7 +36,7 @@ export default function Input({ item: { title, icon, isSecure = false, secureIco
                             secureTextEntry={isVisible}
                             placeholder={title}
                             onChangeText={(value) => { changeFormInfo(type, value) }}
-                            value={formInfo.type}
+                            value={user[type]}
                         />
                         <Text className='text-[11px] text-primary absolute -top-[8px] left-[10px] bg-white 
                 px-[10px] border-l-[1px] border-r-[1px] border-border'>{title}</Text>
@@ -43,7 +56,7 @@ export default function Input({ item: { title, icon, isSecure = false, secureIco
                         <TextInput className='h-full px-[37px] text-[13px]'
                             placeholder={title}
                             onChangeText={(value) => { changeFormInfo(type, value) }}
-                            value={formInfo.type}
+                            value={user[type]}
                         />
                         <Text className='text-[11px] text-primary absolute -top-[8px] left-[10px] bg-white 
                 px-[10px] border-l-[1px] border-r-[1px] border-border'>{title}</Text>
