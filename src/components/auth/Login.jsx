@@ -3,9 +3,16 @@ import React from 'react';
 import Input from '../shared/Input';
 import Button from '../shared/Button';
 import { loginForm } from '../../utils/const/authForm';
+import { setLoader } from '../../redux/generalSlice';
+import { useDispatch } from 'react-redux';
 
 export default function Login({ navigation }) {
+    const dispatch = useDispatch();
 
+    const changePage = () => {
+        dispatch(setLoader());
+        navigation.navigate('Register');
+    }
 
     return (
         <View className='bg-white flex-1 items-center justify-center px-5'>
@@ -27,9 +34,9 @@ export default function Login({ navigation }) {
                 />
             </View>
 
-            <View className='w-full mt-5'>
+            <TouchableOpacity onPress={changePage} className='w-full mt-5'>
                 <Button title={'Giriş Yap'} />
-            </View>
+            </TouchableOpacity>
 
             <View className='w-full mt-5 flex-row'>
                 <Text className='text-primary'>Hala bir hesabınız yok mu?</Text>
