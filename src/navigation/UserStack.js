@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 export default function UserStack() {
     return (
         <NavigationContainer>
-            <Tab.Navigator screenOptions={{ headerShown: false }}>
+            <Tab.Navigator screenOptions={{ headerShown: false, tabBarShowLabel: false }}>
                 <Tab.Screen name="Home" component={HomeScreen}
                     options={{
                         tabBarLabel: ({ focused }) => (
@@ -55,7 +55,7 @@ export default function UserStack() {
                 <Tab.Screen name="AddTask" component={AddTaskScreen}
                     options={{
                         tabBarLabel: () => (<Text className='text-[11px] text-main font-medium'>Task Ekle</Text>),
-                        tabBarIcon: () => (<Entypo name="squared-plus" size={24} color="#3B5BDB" />),
+                        tabBarIcon: () => (<Entypo name="squared-plus" size={32} color="#3B5BDB" />),
                     }}
                 />
                 <Tab.Screen name="Completed" component={CompletedScreen}
