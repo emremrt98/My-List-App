@@ -1,9 +1,12 @@
 import { Text, View, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import { Feather } from '@expo/vector-icons';
+import Modal from '../shared/Modal';
+import Notification from './Notification';
 
 
-export default function Header({ setModalVisible }) {
+export default function Header() {
+    const [modalVisible, setModalVisible] = useState(false);
     return (
         <View className='bg-white flex-row justify-between p-[10px] items-center'>
             <View className='flex-row gap-[7px] items-center'>
@@ -26,6 +29,9 @@ export default function Header({ setModalVisible }) {
                     </View>
                 </View>
             </TouchableOpacity>
+            <Modal setModalVisible={setModalVisible} modalVisible={modalVisible} >
+                <Notification setModalVisible={setModalVisible} />
+            </Modal>
         </View>
     )
 }

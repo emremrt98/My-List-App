@@ -1,10 +1,14 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import Section from '../shared/Section';
 import { Feather } from '@expo/vector-icons';
 import ListItem from '../shared/ListItem';
+import Modal from '../shared/Modal';
+import Goal from './Goal';
+
 
 export default function List() {
+    const [modalVisible, setModalVisible] = useState(true);
     return (
         <Section>
 
@@ -22,9 +26,14 @@ export default function List() {
                 <ListItem />
                 <ListItem />
             </View>
-            <TouchableOpacity className='mt-[10px]'>
+            <TouchableOpacity className='mt-[10px]' onPress={() => setModalVisible(true)}>
                 <Text className='text-center text-secondary text-[11px] underline'>Hedefini Gör</Text>
             </TouchableOpacity>
+
+            <Modal setModalVisible={setModalVisible} modalVisible={modalVisible} >
+                {/* <Notification setModalVisible={setModalVisible} /> */}
+                <Goal setModalVisible={setModalVisible} />
+            </Modal>
         </Section>
     )
 }

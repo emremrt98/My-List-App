@@ -9,19 +9,17 @@ import Notification from '../components/home/Notification';
 import Modal from '../components/shared/Modal';
 
 export default function HomeScreen() {
-    const [modalVisible, setModalVisible] = useState(false);
+ 
     return (
         <SafeAreaView className='flex-1'>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <Header setModalVisible={setModalVisible} />
+                <Header  />
                 <List />
                 <PremiumBanner />
                 <Completed />
             </ScrollView>
 
-            <Modal setModalVisible={setModalVisible} modalVisible={modalVisible} animation={'fade'} >
-                <Notification setModalVisible={setModalVisible} />
-            </Modal>
+            
         </SafeAreaView>
     )
 }

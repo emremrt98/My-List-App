@@ -1,7 +1,7 @@
 import React from 'react'
 import { Modal } from 'react-native';
 
-export default function CustomModal({ children, animation, setModalVisible, modalVisible }) {
+export default function CustomModal({ children, animation = 'fade', setModalVisible, modalVisible }) {
     return (
         <Modal
             animationType={animation}
