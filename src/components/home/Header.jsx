@@ -1,4 +1,4 @@
-import { Text, View, Image, TouchableOpacity } from 'react-native'
+import { Text, View, Image, TouchableOpacity, StatusBar } from 'react-native'
 import React, { useState } from 'react'
 import { Feather } from '@expo/vector-icons';
 import Modal from '../shared/Modal';
@@ -31,6 +31,7 @@ export default function Header() {
             </TouchableOpacity>
             <Modal setModalVisible={setModalVisible} modalVisible={modalVisible} >
                 <Notification setModalVisible={setModalVisible} />
+                
             </Modal>
         </View>
     )

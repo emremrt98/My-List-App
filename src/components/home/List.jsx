@@ -8,7 +8,7 @@ import Goal from './Goal';
 
 
 export default function List() {
-    const [modalVisible, setModalVisible] = useState(true);
+    const [modalVisible, setModalVisible] = useState(false);
     return (
         <Section>
 
