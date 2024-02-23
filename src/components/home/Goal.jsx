@@ -1,12 +1,12 @@
-import { Text, View, TouchableOpacity, Dimensions, StyleSheet, ScrollView } from 'react-native'
+import { Text, View, TouchableOpacity, Dimensions, ScrollView } from 'react-native'
 import React from 'react'
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import ListItem from '../shared/ListItem';
 import ProgressBar from '../shared/ProgressBar';
 
 
 export default function Goal({ setModalVisible }) {
-    const width = Dimensions.get('window').width;
+    // const width = Dimensions.get('window').width;
     const height = Dimensions.get('window').height / 2 + 30;
     return (
         <View className='bg-[#343a4080] w-full h-full justify-center items-center'>
@@ -26,7 +26,7 @@ export default function Goal({ setModalVisible }) {
                     </View>
 
                     <ProgressBar />
-                    
+
                     <View className='mb-5 items-center'>
                         <Text className='text-[13px] text-main font-medium'>Hedefine ulaşmana az kaldı</Text>
                     </View>
