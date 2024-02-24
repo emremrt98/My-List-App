@@ -1,18 +1,28 @@
 import { View, Image, Text, TouchableOpacity, FlatList } from 'react-native';
-import React from 'react';
+import React, { useReducer } from 'react';
 import Input from '../shared/Input';
 import Button from '../shared/Button';
 import { loginForm } from '../../utils/const/authForm';
 import { setLoader } from '../../redux/generalSlice';
 import { useDispatch } from 'react-redux';
+import { inputReducer } from '../../reducer/inputReducer';
+
 
 export default function Login({ navigation }) {
-    const dispatch = useDispatch();
+    const reduxDispatch = useDispatch();
 
     const changePage = () => {
-        dispatch(setLoader());
+        reduxDispatch(setLoader());
         navigation.navigate('Register');
     }
+
+    const initialState = {
+        email: '',
+        password: '',
+    }
+
+    const [state, dispatch] = useReducer(inputReducer, initialState);
+
 
     return (
         <View className='bg-white flex-1 items-center justify-center px-5'>
@@ -27,7 +37,7 @@ export default function Login({ navigation }) {
                     data={loginForm}
                     renderItem={({ item }) => (
                         <View className='mt-5 w-full'>
-                            <Input item={item} />
+                            <Input item={item} dispatch={dispatch} state={state} />
                         </View>
                     )}
                     keyExtractor={item => item.id}

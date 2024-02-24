@@ -12,7 +12,7 @@ export default function UserStack() {
     return (
         <NavigationContainer>
             <Tab.Navigator screenOptions={{ headerShown: false, tabBarShowLabel: false }}>
-                <Tab.Screen name="Home" component={PremiumScreen}
+                <Tab.Screen name="Home" component={HomeScreen}
                     options={{
                         tabBarLabel: ({ focused }) => (
                             focused

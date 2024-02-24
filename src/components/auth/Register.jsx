@@ -1,10 +1,23 @@
 import { Text, View, TouchableOpacity, FlatList, Image } from 'react-native';
-import React from 'react';
+import React, { useReducer } from 'react';
 import Input from '../shared/Input';
 import Button from '../shared/Button';
 import { registerForm } from '../../utils/const/authForm';
+import { inputReducer } from '../../reducer/inputReducer';
 
 export default function Register({ navigation }) {
+
+    const initialState = {
+        name: '',
+        surname: '',
+        email: '',
+        password: '',
+        rpassword: ''
+    }
+
+    const [state, dispatch] = useReducer(inputReducer, initialState);
+
+
     return (
         <View className='bg-white flex-1 items-center justify-center px-5'>
             <View>
@@ -18,7 +31,7 @@ export default function Register({ navigation }) {
                     data={registerForm}
                     renderItem={({ item }) => (
                         <View className='mt-5 w-full'>
-                            <Input item={item} />
+                            <Input item={item} dispatch={dispatch} state={state} />
                         </View>
                     )}
                     keyExtractor={item => item.id}
