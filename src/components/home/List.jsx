@@ -11,7 +11,6 @@ export default function List() {
     const [modalVisible, setModalVisible] = useState(false);
     return (
         <Section>
-
             <View className='flex-row justify-between'>
                 <Text className='text-[16px] text-primary font-medium'>Yapılacaklar Listesi</Text>
                 <TouchableOpacity className='flex-row gap-[7px] items-center'>

@@ -6,6 +6,7 @@ export default function TextArea() {
         <View className='w-full rounded-[6px] border-[1px] border-border bg-white relative' >
             <TextInput className='px-[15px] text-[13px] py-[15px]'
                 multiline={true}
+                selectionColor={'#343A40'}
                 numberOfLines={12}
                 placeholder='Açıklama'
                 onChangeText={(value) => { console.log('Selam') }}

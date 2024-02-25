@@ -25,6 +25,7 @@ export default function Input({ item: { title, icon, isSecure = false, secureIco
                         <TextInput className='h-full px-[37px] text-[13px]'
                             secureTextEntry={isVisible}
                             placeholder={title}
+                            selectionColor={'#343A40'}
                             onChangeText={(value) => { changeFormInfo(type, value) }}
                             value={state[type]}
                         />
@@ -45,6 +46,7 @@ export default function Input({ item: { title, icon, isSecure = false, secureIco
                         <View className='absolute left-[10px] top-[12px]'>{icon}</View>
                         <TextInput className='h-full px-[37px] text-[13px]'
                             placeholder={title}
+                            selectionColor={'#343A40'}
                             onChangeText={(value) => { changeFormInfo(type, value) }}
                             value={state[type]}
                         />
