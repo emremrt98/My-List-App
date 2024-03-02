@@ -6,23 +6,22 @@ import { loginForm } from '../../utils/const/authForm';
 import { setLoader } from '../../redux/generalSlice';
 import { useDispatch } from 'react-redux';
 import { inputReducer } from '../../reducer/inputReducer';
-
+import { loginWithEmailAndPassword } from '../../auth';
 
 export default function Login({ navigation }) {
     const reduxDispatch = useDispatch();
-
-    const changePage = () => {
-        reduxDispatch(setLoader());
-        navigation.navigate('Register');
-    }
 
     const initialState = {
         email: '',
         password: '',
     }
-
     const [state, dispatch] = useReducer(inputReducer, initialState);
 
+    const loginApp = () => {
+        reduxDispatch(setLoader());
+        const userData = loginWithEmailAndPassword(state.email, state.password);
+        console.log("User Data: ", userData);
+    }
 
     return (
         <View className='bg-white flex-1 items-center justify-center px-5'>
@@ -44,7 +43,7 @@ export default function Login({ navigation }) {
                 />
             </View>
 
-            <TouchableOpacity onPress={changePage} className='w-full mt-5'>
+            <TouchableOpacity onPress={loginApp} className='w-full mt-5'>
                 <Button title={'Giriş Yap'} />
             </TouchableOpacity>
 
