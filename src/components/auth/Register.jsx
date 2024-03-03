@@ -4,12 +4,12 @@ import Input from '../shared/Input';
 import Button from '../shared/Button';
 import { registerForm } from '../../utils/const/authForm';
 import { inputReducer } from '../../reducer/inputReducer';
+import { registerWithEmailAndPassword } from '../../auth';
+
 
 export default function Register({ navigation }) {
 
     const initialState = {
-        name: '',
-        surname: '',
         email: '',
         password: '',
         rpassword: ''
@@ -17,6 +17,10 @@ export default function Register({ navigation }) {
 
     const [state, dispatch] = useReducer(inputReducer, initialState);
 
+    const registerApp = () => {
+        const userData = registerWithEmailAndPassword(state.email, state.password);
+        // console.log("User Data: ", userData);
+    }
 
     return (
         <View className='bg-white flex-1 items-center justify-center px-5'>
@@ -38,9 +42,9 @@ export default function Register({ navigation }) {
                 />
             </View>
 
-            <View className='w-full mt-5'>
+            <TouchableOpacity onPress={registerApp} className='w-full mt-5'>
                 <Button title={'Kayıt Ol'} />
-            </View>
+            </TouchableOpacity>
 
             <View className='w-full mt-5 flex-row'>
                 <Text className='text-primary'>Yoksa bir hesabınız mı var? </Text>
