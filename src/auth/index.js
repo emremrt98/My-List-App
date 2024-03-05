@@ -7,7 +7,6 @@ export const loginWithEmailAndPassword = async (email, password) => {
         return getUserData(userCredential);
 
     } catch (error) {
-        console.log("Error logging in: ", error);
         throw error;
     }
 }
@@ -26,8 +25,5 @@ export const registerWithEmailAndPassword = async (email, password) => {
 const getUserData = (userCredential) => {
     const user = userCredential.user;
     const token = user.stsTokenManager.accessToken;
-    console.log("Token: ", token);
-    console.log("User logged in: ", user);
-
     return userData = { user, token };
 }
