@@ -1,5 +1,5 @@
 import { View, Image, Text, TouchableOpacity, FlatList } from 'react-native';
-import React, { useEffect, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import Input from '../shared/Input';
 import Button from '../shared/Button';
 import { loginForm } from '../../utils/const/authForm';
@@ -9,6 +9,8 @@ import { inputReducer } from '../../reducer/inputReducer';
 import { loginWithEmailAndPassword } from '../../auth';
 import { errorMessages } from '../../utils/const/errorHandling';
 import ErrorInfo from '../messageHandling/ErrorInfo';
+import { validation } from '../../validation';
+
 
 export default function Login({ navigation }) {
     const reduxDispatch = useDispatch();
@@ -22,20 +24,19 @@ export default function Login({ navigation }) {
 
     const loginApp = async () => {
         try {
-            reduxDispatch(setLoader());
-            const userData = await loginWithEmailAndPassword(state.email, state.password);
-            console.log("User Data: ", userData);
+            const validationResponse = await validation(state);
+
+            if (validationResponse) {
+                reduxDispatch(setLoader());
+                await loginWithEmailAndPassword(state.email, state.password);
+            } else {
+                reduxDispatch(setErrorMessage({ statusCode: true, [validationResponse.message]: validationResponse.message }));
+            }
+
         } catch (error) {
             reduxDispatch(setErrorMessage(errorMessages(error.code)));
         }
     }
-    useEffect(() => {
-        if (errorMessage.statusCode) {
-            setTimeout(() => {
-                reduxDispatch(setErrorMessage({ statusCode: false, message: '' }));
-            }, 5000);
-        }
-    }, [errorMessage.statusCode])
 
     return (
         <View className='bg-white flex-1 items-center justify-center px-5'>
@@ -69,7 +70,7 @@ export default function Login({ navigation }) {
             </View>
 
             {
-                errorMessage.statusCode && <ErrorInfo message={errorMessage.message} />
+                errorMessage.statusCode && <ErrorInfo errorMessage={errorMessage} />
             }
         </View>
     )

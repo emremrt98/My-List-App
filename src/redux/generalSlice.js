@@ -17,7 +17,7 @@ export const generalSlice = createSlice({
         },
 
         setErrorMessage: (state, action) => {
-            console.log(action);
+            console.log("action : ", action);
             state.errorMessage.statusCode = action.payload.statusCode;
             state.errorMessage.message = action.payload.message;
         }
