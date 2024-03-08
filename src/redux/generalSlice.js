@@ -6,6 +6,11 @@ const initialState = {
         statusCode: false,
         message: '',
     },
+    auth: {
+        user: null,
+        isLogin: false,
+        token: '',
+    }
 }
 
 export const generalSlice = createSlice({
@@ -17,13 +22,19 @@ export const generalSlice = createSlice({
         },
 
         setErrorMessage: (state, action) => {
-            console.log("action : ", action);
             state.errorMessage.statusCode = action.payload.statusCode;
             state.errorMessage.message = action.payload.message;
+        },
+
+        setAuth: (state, action) => {
+            state.auth.user = action.payload.user;
+            state.auth.isLogin = action.payload.isLogin;
+            state.auth.token = action.payload.token;
+            console.log(action)
         }
     },
 })
 
-export const { setLoader, setErrorMessage } = generalSlice.actions
+export const { setLoader, setErrorMessage, setAuth } = generalSlice.actions
 
 export default generalSlice.reducer

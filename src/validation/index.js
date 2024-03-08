@@ -9,7 +9,9 @@ let validationSchema = object({
 export const validation = async (userInfo) => {
     try {
         await validationSchema.validate(userInfo);
-        return true;
+        return validationResponse = {
+            statusCode: true
+        };
     } catch (error) {
         return {
             statusCode: false,

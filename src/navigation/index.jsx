@@ -8,13 +8,12 @@ import app from '../../firebaseConfig';
 
 
 export default function NavigationStack() {
-    const { loader } = useSelector((state) => state.general);
-    const isLogin = false;
+    const { loader, auth } = useSelector((state) => state.general);
 
     return (
         <>
             {
-                isLogin ? <UserStack /> : <AuthStack />
+                auth.isLogin ? <UserStack /> : <AuthStack />
             }
             {
                 loader && <Loader loader={loader} />

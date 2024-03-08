@@ -11,15 +11,15 @@ export default function ErrorInfo({ errorMessage: { statusCode, message } }) {
         if (statusCode) {
             setTimeout(() => {
                 reduxDispatch(setErrorMessage({ statusCode: false, message: '' }));
-            }, 5000);
+            }, 7000);
         }
     }, [statusCode])
 
 
 
     return (
-        <View className='absolute bottom-0 bg-red-500 w-full p-[10px] rounded-tl-[6px] rounded-tr-[6px]'>
-            <Text className='text-white font-medium'>{message}</Text>
+        <View className='absolute bottom-[20px] bg-[#fff5f5] border-[1px] border-[#ff3200] w-full p-[10px] rounded-[6px] rounded-tr-[6px]'>
+            <Text className='text-[#ff3200] font-medium'>{message}</Text>
         </View>
     )
 }

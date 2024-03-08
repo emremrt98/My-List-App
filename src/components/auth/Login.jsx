@@ -3,7 +3,7 @@ import React, { useReducer } from 'react';
 import Input from '../shared/Input';
 import Button from '../shared/Button';
 import { loginForm } from '../../utils/const/authForm';
-import { setLoader, setErrorMessage } from '../../redux/generalSlice';
+import { setLoader, setErrorMessage, setAuth } from '../../redux/generalSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { inputReducer } from '../../reducer/inputReducer';
 import { loginWithEmailAndPassword } from '../../auth';
@@ -25,12 +25,13 @@ export default function Login({ navigation }) {
     const loginApp = async () => {
         try {
             const validationResponse = await validation(state);
-
-            if (validationResponse) {
+            console.log(validationResponse)
+            if (validationResponse.statusCode) {
                 reduxDispatch(setLoader());
-                await loginWithEmailAndPassword(state.email, state.password);
+                const userData = await loginWithEmailAndPassword(state.email, state.password);
+                reduxDispatch(setAuth({ userData, isLogin: true }));
             } else {
-                reduxDispatch(setErrorMessage({ statusCode: true, [validationResponse.message]: validationResponse.message }));
+                reduxDispatch(setErrorMessage({ statusCode: true, message: validationResponse.message }));
             }
 
         } catch (error) {

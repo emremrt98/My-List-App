@@ -19,7 +19,6 @@ export default function Register({ navigation }) {
 
     const registerApp = () => {
         const userData = registerWithEmailAndPassword(state.email, state.password);
-        // console.log("User Data: ", userData);
     }
 
     return (
