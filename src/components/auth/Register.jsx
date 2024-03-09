@@ -5,10 +5,15 @@ import Button from '../shared/Button';
 import { registerForm } from '../../utils/const/authForm';
 import { inputReducer } from '../../reducer/inputReducer';
 import { registerWithEmailAndPassword } from '../../auth';
-
+import { setLoader, setErrorMessage, setAuth } from '../../redux/generalSlice';
+import { validationRegister } from '../../validation';
+import { useDispatch, useSelector } from 'react-redux';
+import { errorMessages } from '../../utils/const/errorHandling';
+import ErrorInfo from '../messageHandling/ErrorInfo';
 
 export default function Register({ navigation }) {
-
+    const reduxDispatch = useDispatch();
+    const { errorMessage } = useSelector((state) => state.general);
     const initialState = {
         email: '',
         password: '',
@@ -17,8 +22,20 @@ export default function Register({ navigation }) {
 
     const [state, dispatch] = useReducer(inputReducer, initialState);
 
-    const registerApp = () => {
-        const userData = registerWithEmailAndPassword(state.email, state.password);
+    const registerApp = async () => {
+        try {
+            const validationResponse = await validationRegister(state);
+
+            if (validationResponse.statusCode) {
+                reduxDispatch(setLoader());
+                await registerWithEmailAndPassword(state.email, state.password);
+                navigation.navigate('Login');
+            } else {
+                reduxDispatch(setErrorMessage({ statusCode: true, message: validationResponse.message }));
+            }
+        } catch (error) {
+            reduxDispatch(setErrorMessage(errorMessages(error.code)));
+        }
     }
 
     return (
@@ -51,6 +68,10 @@ export default function Register({ navigation }) {
                     <Text className='font-[600] ml-[7px] text-primary underline'>Giriş Yap</Text>
                 </TouchableOpacity>
             </View>
+
+            {
+                errorMessage.statusCode && <ErrorInfo errorMessage={errorMessage} />
+            }
         </View>
     )
 }

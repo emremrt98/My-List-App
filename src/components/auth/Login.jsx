@@ -9,7 +9,7 @@ import { inputReducer } from '../../reducer/inputReducer';
 import { loginWithEmailAndPassword } from '../../auth';
 import { errorMessages } from '../../utils/const/errorHandling';
 import ErrorInfo from '../messageHandling/ErrorInfo';
-import { validation } from '../../validation';
+import { validationLogin } from '../../validation';
 
 
 export default function Login({ navigation }) {
@@ -24,8 +24,8 @@ export default function Login({ navigation }) {
 
     const loginApp = async () => {
         try {
-            const validationResponse = await validation(state);
-            console.log(validationResponse)
+            const validationResponse = await validationLogin(state);
+            
             if (validationResponse.statusCode) {
                 reduxDispatch(setLoader());
                 const userData = await loginWithEmailAndPassword(state.email, state.password);
